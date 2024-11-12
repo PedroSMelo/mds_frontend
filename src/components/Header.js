@@ -1,51 +1,72 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import govLogo from '../imagens/govbr.png';
 
 const Header = ({ density = 'small' }) => {
+  const [showButtons, setShowButtons] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const toggleButtonsVisibility = () => {
+    setShowButtons(!showButtons);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('auth');  
+    navigate('/login');  
+  };
+
+  const getTitle = () => {
+    switch (location.pathname) {
+      case '/login':
+        return `Login`;
+      case '/registro':
+        return 'Registro';
+      case '/painel':
+        return 'Painel';
+      default:
+        return 'Bem-vindo ao Govbr';
+    }
+  };
+
   return (
     <header className={`br-header ${density}`}>
       <div className="container-lg">
         <div className="header-top">
           <div className="header-logo">
-            <img alt="Logo" />
+            <img src={govLogo} alt="Logo" />
             <span className="br-divider vertical"></span>
-            <div className="header-sign">Assinatura</div>
           </div>
           <div className="header-actions">
             <div className="header-links dropdown">
-              <button className="br-button circle small" type="button" data-toggle="dropdown" aria-label="Abrir Acesso Rápido">
+              <button 
+                className="br-button circle small" 
+                type="button" 
+                data-toggle="dropdown" 
+                aria-label="Abrir Acesso Rápido"
+                onClick={toggleButtonsVisibility} 
+              >
                 <i className="fas fa-ellipsis-v" aria-hidden="true"></i>
               </button>
-              <div className="br-list">
-                <div className="header">
-                  <div className="title">Acesso Rápido</div>
-                </div>
-                {[1, 2, 3, 4].map((i) => (
-                  <a key={i} className="br-item" href="javascript:void(0)">
-                    Link de acesso {i}
-                  </a>
-                ))}
-              </div>
             </div>
+
+              <div className="header-functions">
+                <a href="/login">
+                  <button className="br-button small" type="button">Login</button>
+                </a>
+                <a href="/registro">
+                  <button className="br-button small" type="button">Registrar</button>
+                </a>
+                <a href="/painel">
+                  <button className="br-button small" type="button">Painel</button>
+                </a>
+                <button className="br-button small" type="button" onClick={handleLogout}>
+                  Sair
+                </button>
+              </div>
+
             <span className="br-divider vertical mx-half mx-sm-1"></span>
-            <div className="header-functions dropdown">
-              <button className="br-button circle small" type="button" data-toggle="dropdown" aria-label="Abrir Funcionalidades do Sistema">
-                <i className="fas fa-th" aria-hidden="true"></i>
-              </button>
-              <div className="br-list">
-                <div className="header">
-                  <div className="title">Funcionalidades do Sistema</div>
-                </div>
-                {['chart-bar', 'headset', 'comment', 'adjust'].map((icon, i) => (
-                  <div key={i} className="br-item">
-                    <button className="br-button circle small" type="button" aria-label={`Funcionalidade ${i + 1}`}>
-                      <i className={`fas fa-${icon}`} aria-hidden="true"></i>
-                      <span className="text">Funcionalidade {i + 1}</span>
-                    </button>
-                  </div>
-                ))}
-              </div>
-            </div>
+
             <div className="header-search-trigger">
               <button className="br-button circle" type="button" aria-label="Abrir Busca" data-toggle="search" data-target=".header-search">
                 <i className="fas fa-search" aria-hidden="true"></i>
@@ -65,13 +86,19 @@ const Header = ({ density = 'small' }) => {
         <div className="header-bottom">
           <div className="header-menu">
             <div className="header-menu-trigger">
-              <button className="br-button small circle" type="button" aria-label="Menu" data-toggle="menu" data-target="#main-navigation" id={`menu-${density}`}>
+              <button 
+                className="br-button small circle" 
+                type="button" 
+                aria-label="Menu" 
+                data-toggle="menu" 
+                data-target="#main-navigation" 
+                id={`menu-${density}`}
+              >
                 <i className="fas fa-bars" aria-hidden="true"></i>
               </button>
             </div>
             <div className="header-info">
-              <div className="header-title">{`Header Densidade ${density === 'small' ? 'Alta' : 'Baixa'}`}</div>
-              <div className="header-subtitle">Subtítulo do Header</div>
+              <div className="header-title">{getTitle()}</div>
             </div>
           </div>
           <div className="header-search">

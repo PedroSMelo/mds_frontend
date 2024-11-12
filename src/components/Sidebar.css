@@ -1,0 +1,65 @@
+.app-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  #main-navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 250px;
+    background-color: #071D41;
+    color: #fff;
+    padding-top: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main-content {
+    margin-left: 250px;
+    padding: 20px;
+    box-sizing: border-box;
+    flex: 1;
+  }
+  
+  .menu-item {
+    padding: 15px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .menu-item:hover {
+    background-color: #2980b9;
+  }
+  
+  .menu-item i {
+    margin-right: 10px;
+  }
+  
+  .menu-item .submenu {
+    padding-left: 20px;
+    display: none;
+  }
+  
+  .menu-item.open .submenu {
+    display: block;
+  }
+  
+  /* Responsividade para telas menores */
+  @media screen and (max-width: 768px) {
+    #main-navigation {
+      width: 200px;
+    }
+  
+    .main-content {
+      margin-left: 200px;
+    }
+  }
+  

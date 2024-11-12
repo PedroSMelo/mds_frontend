@@ -1,6 +1,6 @@
-// src/components/UserList.js
 import React from 'react';
 import { useUsers } from '../hooks/useUsers';
+import './UserList.css';
 
 const UserList = () => {
   const { users, loading, error } = useUsers();

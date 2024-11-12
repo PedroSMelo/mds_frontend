@@ -3,25 +3,30 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginUser from './pages/LoginUser'; 
 import RegisterUser from './pages/RegisterUser';  
 import Painel from './pages/Painel';
-import Header from './components/Header'; 
-import Menu from './components/Sidebar'; 
-import '@govbr-ds/core/dist/core.min.css';
-import Footer from './components/Footer';
+import Header from './components/Header';  
+import Footers from './components/Footer';
+import PrivateRoute from './components/PrivateRoute';
+import Menu from './components/Sidebar';
+
 
 
 function App() {
   return (
     <Router>
       <Header />
-      <Menu />
+      
       <div className="content">
         <Routes>
-          <Route path="/" element={<LoginUser />} />  
-          <Route path="/registro" element={<RegisterUser />} />  
-          <Route path="/painel" element={<Painel />} />
+        <Route path="/login" element={<LoginUser />} />
+        <Route 
+          path="/painel" 
+          element={<PrivateRoute element={<Painel />} />}
+        />
+        <Route path="/registro" element={<RegisterUser />} />  
+        <Route path="/painel" element={<Painel />} />
         </Routes>
       </div>
-      <Footer />
+      <Footers />
     </Router>
   );
 }

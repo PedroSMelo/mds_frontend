@@ -1,94 +1,67 @@
 import React from 'react';
+import './Sidebar.css';
 
 const menuList = [
   {
     id: 1,
     icon: 'bell',
-    name: 'Menu Group 1',
-    url: 'https://www.google.com.br/',
+    name: 'Registrar',
+    url: '/Registro',
   },
   {
     id: 2,
-    icon: 'bell',
-    name: 'Nível 1',
-    list: [
-      {
-        icon: 'address-book',
-        name: 'Nivel 2',
-        url: 'javascript:void(0)',
-        list: [
-          {
-            icon: 'tree',
-            name: 'Nivel 3',
-            url: 'javascript:void(0)',
-            list: [
-              {
-                icon: 'tree',
-                name: 'Nivel 4',
-                url: 'javascript:void(0)',
-              },
-              {
-                icon: 'tree',
-                name: 'Nivel 4',
-              },
-            ],
-          },
-          {
-            icon: 'tree',
-            name: 'Nivel 3',
-            url: 'javascript:void(0)',
-          },
-        ],
-      },
-      {
-        icon: 'heart',
-        name: 'Nivel 2',
-        url: 'javascript:void(0)',
-      },
-    ],
+    icon: 'tachometer-alt',
+    name: 'Painel',
+    url: '/Painel',
   },
   {
     id: 3,
-    icon: 'bell',
-    name: 'Menu Group 3',
-    isSpaLinkBehavior: 'true',
-    url: '/input',
+    icon: 'sign-in-alt',
+    name: 'Login',
+    url: '/login',
   },
 ];
 
-const MenuItem = ({ item }) => (
-  <div>
-    <a href={item.url || 'javascript:void(0)'}>
-      <i className={`fas fa-${item.icon}`}></i> {item.name}
-    </a>
-    {item.list && (
-      <div style={{ paddingLeft: '20px' }}>
-        {item.list.map((subItem, index) => (
-          <MenuItem key={index} item={subItem} />
+const MenuItem = ({ item }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const toggleSubMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <div>
+      <a
+        href={item.url || 'javascript:void(0)'}
+        className="menu-item"
+        onClick={item.list ? toggleSubMenu : undefined}
+      >
+        <i className={`fas fa-${item.icon}`}></i> {item.name}
+      </a>
+      {item.list && isOpen && (
+        <div className="submenu">
+          {item.list.map((subItem, index) => (
+            <MenuItem key={index} item={subItem} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const Sidebar = () => (
+  <div className="app-container">
+    <div id="main-navigation">
+      <div className="menu">
+        {menuList.map((item) => (
+          <MenuItem key={item.id} item={item} />
         ))}
       </div>
-    )}
+    </div>
+    <div className="main-content">
+      {/* Conteúdo principal da página */}
+    </div>
   </div>
 );
 
-const Menu = () => (
-    <div  id="main-navigation">
-      <div class="menu-container">
-        <div class="menu-panel">
-          <div class="menu-header">
-            <div className="row">
-              <div className="col-sm-4 col-lg-3">
-                <div className="menu">
-                  {menuList.map((item) => (
-                    <MenuItem key={item.id} item={item} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-);
-
-export default Menu;
+export default Sidebar;

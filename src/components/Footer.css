@@ -1,0 +1,118 @@
+/* Estilo do container principal */
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garante que o conteúdo ocupe 100% da altura da tela */
+}
+
+.main-content {
+  flex: 1; /* Isso faz o conteúdo ocupar o restante da altura disponível */
+}
+
+/* Estilo do rodapé */
+.footer {
+  background-color: #003366;
+  color: white;
+  padding: 40px 0;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+.footer-logo img {
+  height: 40px;
+  width: auto;
+}
+
+.footer-categories {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+.category h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.category ul {
+  list-style: none;
+  padding: 0;
+}
+
+.category ul li {
+  margin-bottom: 8px;
+}
+
+.category ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.category ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-social {
+  width: 80%;
+  text-align: center;
+}
+
+.footer-social h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.social-icons {
+  font-size: 20px;
+}
+
+.social-icons i {
+  margin-right: 15px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.social-icons i:hover {
+  color: black;
+}
+
+/* Responsividade para telas menores */
+@media screen and (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-categories {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-social {
+    text-align: center;
+  }
+
+  .social-icons i {
+    margin-right: 10px;
+  }
+}
