@@ -1,4 +1,3 @@
-// src/context/UserContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { fetchUsers } from '../api/userApi';
 

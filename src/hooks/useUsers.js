@@ -1,4 +1,3 @@
-// src/hooks/useUsers.js
 import { useUserContext } from '../context/UserContext';
 
 export const useUsers = () => {

@@ -4,7 +4,7 @@ import LoginUser from './pages/LoginUser';
 import RegisterUser from './pages/RegisterUser';  
 import Painel from './pages/Painel';
 import Header from './components/Header'; 
-import MenuLateral from './components/Sidebar'; 
+import Menu from './components/Sidebar'; 
 import '@govbr-ds/core/dist/core.min.css';
 import Footer from './components/Footer';
 
@@ -13,7 +13,7 @@ function App() {
   return (
     <Router>
       <Header />
-      <MenuLateral />
+      <Menu />
       <div className="content">
         <Routes>
           <Route path="/" element={<LoginUser />} />  

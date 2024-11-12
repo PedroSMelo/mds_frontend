@@ -1,31 +1,91 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ density = 'small' }) => {
   return (
-    <header className="br-header compact">
+    <header className={`br-header ${density}`}>
       <div className="container-lg">
         <div className="header-top">
           <div className="header-logo">
-            <img
-              src="data:image/png;base64,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"
-              alt="Logo"
-              className="header-logo-img"
-            />
+            <img alt="Logo" />
+            <span className="br-divider vertical"></span>
+            <div className="header-sign">Assinatura</div>
           </div>
-          <div className="header-toggle">
+          <div className="header-actions">
+            <div className="header-links dropdown">
+              <button className="br-button circle small" type="button" data-toggle="dropdown" aria-label="Abrir Acesso Rápido">
+                <i className="fas fa-ellipsis-v" aria-hidden="true"></i>
+              </button>
+              <div className="br-list">
+                <div className="header">
+                  <div className="title">Acesso Rápido</div>
+                </div>
+                {[1, 2, 3, 4].map((i) => (
+                  <a key={i} className="br-item" href="javascript:void(0)">
+                    Link de acesso {i}
+                  </a>
+                ))}
+              </div>
+            </div>
+            <span className="br-divider vertical mx-half mx-sm-1"></span>
+            <div className="header-functions dropdown">
+              <button className="br-button circle small" type="button" data-toggle="dropdown" aria-label="Abrir Funcionalidades do Sistema">
+                <i className="fas fa-th" aria-hidden="true"></i>
+              </button>
+              <div className="br-list">
+                <div className="header">
+                  <div className="title">Funcionalidades do Sistema</div>
+                </div>
+                {['chart-bar', 'headset', 'comment', 'adjust'].map((icon, i) => (
+                  <div key={i} className="br-item">
+                    <button className="br-button circle small" type="button" aria-label={`Funcionalidade ${i + 1}`}>
+                      <i className={`fas fa-${icon}`} aria-hidden="true"></i>
+                      <span className="text">Funcionalidade {i + 1}</span>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="header-search-trigger">
+              <button className="br-button circle" type="button" aria-label="Abrir Busca" data-toggle="search" data-target=".header-search">
+                <i className="fas fa-search" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div className="header-login">
+              <div className="header-sign-in">
+                <button className="br-sign-in small" type="button" data-trigger="login">
+                  <i className="fas fa-user" aria-hidden="true"></i>
+                  <span className="d-sm-inline">Entrar</span>
+                </button>
+              </div>
+              <div className="header-avatar"></div>
+            </div>
           </div>
         </div>
-        <div className="header-main">
-          <nav className="main-nav">
-            <ul className="nav-list">
-              <li><Link to="/">Acesso</Link></li>
-              <li><Link to="/registro">Registro</Link></li>
-              <li><Link to="/painel">Painel</Link></li>
-            </ul>
-            <button class="br-sign-in medium primary mt-3 mt-sm-0 ml-sm-3" type="button">Entrar com&nbsp;<span class="text-black">gov.br</span>
-</button>
-          </nav>
+        <div className="header-bottom">
+          <div className="header-menu">
+            <div className="header-menu-trigger">
+              <button className="br-button small circle" type="button" aria-label="Menu" data-toggle="menu" data-target="#main-navigation" id={`menu-${density}`}>
+                <i className="fas fa-bars" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div className="header-info">
+              <div className="header-title">{`Header Densidade ${density === 'small' ? 'Alta' : 'Baixa'}`}</div>
+              <div className="header-subtitle">Subtítulo do Header</div>
+            </div>
+          </div>
+          <div className="header-search">
+            <div className="br-input has-icon">
+              <label htmlFor={`searchbox-${density}`}>Texto da pesquisa</label>
+              <input id={`searchbox-${density}`} type="text" placeholder="O que você procura?" />
+              <button className="br-button circle small" type="button" aria-label="Pesquisar">
+                <i className="fas fa-search" aria-hidden="true"></i>
+              </button>
+            </div>
+            <button className="br-button circle search-close ml-1" type="button" aria-label="Fechar Busca" data-dismiss="search">
+              <i className="fas fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
       </div>
     </header>
